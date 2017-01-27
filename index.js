@@ -24,7 +24,7 @@ app.get('/webhook/', function(req, res){
     res.send("Wrong Token");
 });
 
-app.get('/webhook/', function(req, res){
+app.post('/webhook/', function(req, res){
     let message_events = req.body.entry[0].message_events;
     for(let i = 0; i < message_events.length; i++){
         let event = message_events[i];
