@@ -14,12 +14,50 @@ app.get('/', function(req, res){
     res.send("Hi I am TrackO");
 });
 
+let token = "EAADZAMn0RmeUBAPshtnIbR1vM89ZCKzofBpkvlVIQ0RZBkZA8UGe6u88HYkPLXVXZAyGOouuSgwUZATDqlxBgz4K9qvX0SVJ6ZAXvY9oexWZBBxmsPzQmr3HKj5WoWTcvVf28Ikztv4TICqqhRjlZCCFlAu2v30rs9oXw8KyyH2IXjAZDZD"
+
+
 app.get('/webhook/', function(req, res){
     if(req.query['hub.verify_token'] == "ReserveM#R00m"){
         res.send(req.query['hub.challenge']);
     }
     res.send("Wrong Token");
 });
+
+app.get('/webhook/', function(req, res){
+    let message_events = req.body.entry[0].message_events;
+    for(let i = 0; i < message_events.length; i++){
+        let event = message_events[i];
+        let sender = event.sender.id;
+        if(event.message && event.message.text){
+            let text = event.message.text;
+            sendText(sender, text);
+        }
+    }
+    res.sendStatus(200);
+});
+
+function sendText(sender, text){
+    let messageData = {text: text};
+    request({
+        url: "https://graph.facebook.com/v2.6/me/messages",
+        qs: {access_token, token},
+        method: "POST",
+        json: {
+            recepit: {id, sender},
+            message: messageData
+        }
+    }, function(error, response, body){
+        if(error){
+            console.log("sending error");
+        }else if(response.body.error){
+            console.log('response body error');
+        }
+    })
+};
+
+
+
 
 app.listen(app.get('port'), function(){
     console.log("running Port");
