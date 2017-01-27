@@ -25,7 +25,7 @@ app.get('/webhook/', function(req, res){
 });
 
 app.post('/webhook/', function(req, res){
-    let message_events = req.body.entry[0].message_events;
+    let messaging_events = req.body.entry[0].messaging;
     for(let i = 0; i < message_events.length; i++){
         let event = message_events[i];
         let sender = event.sender.id;
@@ -41,10 +41,10 @@ function sendText(sender, text){
     let messageData = {text: text};
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
-        qs: {access_token, token},
+        qs: {access_token: token},
         method: "POST",
         json: {
-            recepit: {id, sender},
+            recipient: {id, sender},
             message: messageData
         }
     }, function(error, response, body){
