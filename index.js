@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.get('/', function(req, res){
     res.send("Hi I am TrackO");
     request("https://api.goshippo.com/tracks/usps/9205590164917312751089", function(error, response, body) {
-        res.send(body);
+        res.send(body.toString);
     });
 });
 
