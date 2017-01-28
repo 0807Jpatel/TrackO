@@ -8,7 +8,7 @@ const shippo = require('shippo')('shippo_test_9242150eb19db0bdb56cbd0f0943a8690f
 const app = express();
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
