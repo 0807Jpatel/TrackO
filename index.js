@@ -100,7 +100,7 @@ function sendText(sender, text){
 // })
 
 app.post('/packageUpdate/', function(req, res){
-    sendText( 1386905277995957 , req.body.metadata);
+    sendText( req.body.metadata , req.tracking_status.status_details);
     res.sendStatus(200);
 });
 
