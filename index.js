@@ -62,7 +62,7 @@ function sendText(sender, text){
 //     sendText(sender, "LOL it worked :)");
 // })
 
-app.POST('/packageUpdate/', function(req, res){
+app.post('/packageUpdate/', function(req, res){
     sendText( 1386905277995957 , "something updated");
     console.log(JSON.stringify(JSON.decycle(req)));
 });
