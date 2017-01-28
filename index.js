@@ -31,7 +31,7 @@ app.post('/webhook/', function(req, res){
         let sender = event.sender.id;
         if(event.message && event.message.text){
             let text = event.message.text;
-            sendText(sender, sender);
+            sendText(sender, text);
         }
     }
     res.sendStatus(200);
@@ -58,7 +58,7 @@ function sendText(sender, text){
 
 
 app.get('/packageUpdate/', function(req, res){
-    res.send("here is the update");
+    sendText(sender, "LOL it worked :)");
 })
 
 
