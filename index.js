@@ -63,8 +63,8 @@ app.get('/packageUpdate/', function(req, res){
 })
 
 app.post('/packageUpdate/', function(req, res){
-    sendText( 1386905277995957 , res.tracking_number);
-    // console.log(res.tracking_number);
+    sendText( 1386905277995957 , "something updated");
+    console.log(res.tracking_number + "THIS IS WHERE I PRINTED OUT ");
     res.send(200);
 })
 
