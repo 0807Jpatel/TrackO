@@ -39,8 +39,8 @@ app.post('/webhook/', function(req, res){
                 let carrier = splits[1];
                 let url = "https://api.goshippo.com/tracks/" + carrier + "/" + TNs + "/";
                 request(url, function(error, response, body) {
-                    if(body.tracking_status){
-                        sendText(sender, body.tracking_status);
+                    if(body.tracking_status != null){
+                        sendText(sender, body.tracking_status.status);
                     }else{
                         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
                     }
