@@ -37,15 +37,24 @@ app.post('/webhook/', function(req, res){
                 let splits = text.split(" ");
                 let TNs = splits[0];
                 let carrier = splits[1];
-                let url = "https://api.goshippo.com/tracks/" + carrier + "/" + TNs + "/";
-                request(url, function(error, response, body) {
-                    let JSONobj = JSON.parse(body);
-                    if(JSONobj.tracking_status != null){
-                        sendText(sender, JSONobj.tracking_status.status_details);
-                    }else{
-                        sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
-                    }
+                // let url = "https://api.goshippo.com/tracks/" + carrier + "/" + TNs + "/";
+                // request(url, function(error, response, body) {
+                //     let JSONobj = JSON.parse(body);
+                //     if(JSONobj.tracking_status != null){
+                //         sendText(sender, JSONobj.tracking_status.status_details);
+                //     }else{
+                //         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
+                //     }
+                // });
+
+                shippo.track.get_status('usps', '1122334455667788')
+                .then(function(status) {
+                        
+	                    sendText(sender, "Tracking info: %s", JSON.stringify(status, null, 4));
+                }, function(err) {
+	                    sendText(sender, "There was an error retrieving tracking information: %s", err);
                 });
+
             }else{
                 sendText(sender, "I wasn't able to understand what you said, please try again.\nTo track package Enter your tracking number and carrier followed by space");
             }
@@ -80,7 +89,7 @@ function sendText(sender, text){
 // })
 
 app.post('/packageUpdate/', function(req, res){
-    sendText( 1386905277995957 , req.body.tracking_number);
+    sendText( 1386905277995957 , req.body.metadata);
     res.sendStatus(200);
 });
 
