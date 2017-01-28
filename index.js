@@ -37,7 +37,7 @@ app.post('/webhook/', function(req, res){
                 let splits = text.split(" ");
                 let TN = splits[0];
                 let carrier = splits[1];
-                url = "https://api.goshippo.com/tracks/" + carrier + "/" + TN + "/";
+                let url = "https://api.goshippo.com/tracks/" + carrier + "/" + TN + "/";
                 sendText(sender, url);
             }else{
                 sendText(sender, "I wasn't able to understand what you said, please try again.\nTo track package Enter your tracking number and carrier followed by space");
