@@ -40,6 +40,7 @@ app.post('/webhook/', function(req, res){
                 let url = "https://api.goshippo.com/tracks/" + carrier + "/" + TNs + "/";
                 request(url, function(error, response, body) {
                     let JSONobj = JSON.parse(body);
+                    console.log(JSONobj.tracking_number)
                     sendText(sender, "Loading");
                     // if(body.tracking_status != null){
                     //     sendText(sender, body.tracking_status.status);
