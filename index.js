@@ -64,7 +64,21 @@ app.get('/packageUpdate/', function(req, res){
 
 app.post('/packageUpdate/', function(req, res){
     sendText( 1386905277995957 , "something updated");
-    console.log(JSON.stringify(req));
+    var cache = [];
+    var value = JSON.stringify(req, function (key, value) {
+        if (typeof value === 'object' && value !== null) {
+            if (cache.indexOf(value) !== -1) {
+                // Circular reference found, discard key
+                return;
+            }
+            // Store value in our collection
+            cache.push(value);
+        }
+        return value;
+    });
+    cache = null; 
+    console.log(req);
+
     res.send(200);
 })
 
