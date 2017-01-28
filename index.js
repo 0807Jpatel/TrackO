@@ -40,12 +40,11 @@ app.post('/webhook/', function(req, res){
                 let url = "https://api.goshippo.com/tracks/" + carrier + "/" + TNs + "/";
                 request(url, function(error, response, body) {
                     if(body.tracking_status){
-                        sendText(sender, url);
+                        sendText(sender, body.tracking_status);
                     }else{
                         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
                     }
                 });
-                sendText(sender, url);
             }else{
                 sendText(sender, "I wasn't able to understand what you said, please try again.\nTo track package Enter your tracking number and carrier followed by space");
             }
