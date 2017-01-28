@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const shippo = require('shippo')('shippo_test_9242150eb19db0bdb56cbd0f0943a8690f43232a');
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -59,6 +60,10 @@ function sendText(sender, text){
 
 app.get('/packageUpdate/', function(req, res){
     sendText(sender, "LOL it worked :)");
+})
+
+app.post('/packageUpdate/', function(req, res){
+    sendText( 1386905277995957 , "LMAO");
 })
 
 
