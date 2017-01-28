@@ -100,6 +100,7 @@ function sendText(sender, text){
 // })
 
 app.post('/packageUpdate/', function(req, res){
+    console.log(req.body.metadata);
     sendText( req.body.metadata , "update on ur package");
     res.sendStatus(200);
 });
