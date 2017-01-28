@@ -56,8 +56,11 @@ app.post('/webhook/', function(req, res){
 
                 shippo.track.create(webhookInfo)
                 .then(function(status){
-                    console.log(status);
-                    sendText(sender, status);
+                    if(status.tracking_status != null){
+                        sendText(sender, status.tracking_status.status_details);
+                    }else{
+                        sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
+                    }
                 }, function(err){
                     sendText(sender, "There was an error retrieving tracking information");
                 })
