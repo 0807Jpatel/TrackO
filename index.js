@@ -64,7 +64,7 @@ app.get('/packageUpdate/', function(req, res){
 
 app.post('/packageUpdate/', function(req, res){
     sendText( 1386905277995957 , "something updated");
-    console.log(res.body.entry[0] + "THIS WAS SOMETHING");
+    console.log(res);
     res.send(200);
 })
 
