@@ -65,10 +65,11 @@ function sendText(sender, text){
 app.get('/packageUpdate/', function(req, res){
     sendText( 1386905277995957 , "something updated");
     shippo.shipment.create({
-        req
-    }, function(err, shipment){
-        console.log(err);
+            req
+        }, function(err, shipment){
+            console.log(err);
     });
+    console.log("QWERTYUIOLKJHGFDSSSSXCVBNM,MMMMMMMMMMMMMMMMMMMMMMMMMMMMMASDKFJALSDJF;AKSDF;ALKSDJF")
 })
 
 
