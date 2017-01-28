@@ -37,17 +37,31 @@ app.post('/webhook/', function(req, res){
                 let splits = text.split(" ");
                 let TNs = splits[0];
                 let carrier = splits[1];
-                shippo.track.get_status(carrier, TNs)
-                .then(function(status) {
-                    if(status.tracking_status != null){
-                        sendText(sender, status.tracking_status.status_details);
-                    }else{
-                        sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
-                    }
-	                    sendText(sender, info);
-                }, function(err) {
-	                    sendText(sender, "There was an error retrieving tracking information");
-                });
+                // shippo.track.get_status(carrier, TNs)
+                // .then(function(status) {
+                //     if(status.tracking_status != null){
+                //         sendText(sender, status.tracking_status.status_details);
+                //     }else{
+                //         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
+                //     }
+	            //         sendText(sender, info);
+                // }, function(err) {
+	            //         sendText(sender, "There was an error retrieving tracking information");
+                // });
+                var webhookInfo = {
+                    "carrier": carrier,
+                    "tracking_number": TNs,
+                    "metadata": sender
+                }
+
+                shippo.track.create(webhookInfo)
+                .then(function(status){
+                    console.log(status);
+                    sendText(sender, status);
+                }, function(err){
+                    sendText(sender, "There was an error retrieving tracking information");
+                })
+
 
             }else{
                 sendText(sender, "I wasn't able to understand what you said, please try again.\nTo track package Enter your tracking number and carrier followed by space");
