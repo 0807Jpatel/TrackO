@@ -37,9 +37,8 @@ app.post('/webhook/', function(req, res){
                 let splits = text.split(" ");
                 let TNs = splits[0];
                 let carrier = splits[1];
-                shippo.track.get_status('usps', '1122334455667788')
+                shippo.track.get_status(carrier, TNs)
                 .then(function(status) {
-                    console.log(JSON.stringify(status));
                     if(status.tracking_status != null){
                         sendText(sender, status.tracking_status.status_details);
                     }else{
