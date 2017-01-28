@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const shippo = require('shippo');
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -12,6 +13,9 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res){
     res.send("Hi I am TrackO");
+    request("https://api.goshippo.com/tracks/usps/9205590164917312751089", function(error, response, body) {
+        console.log(body);
+    });
 });
 
 let token = "EAADZAMn0RmeUBAPshtnIbR1vM89ZCKzofBpkvlVIQ0RZBkZA8UGe6u88HYkPLXVXZAyGOouuSgwUZATDqlxBgz4K9qvX0SVJ6ZAXvY9oexWZBBxmsPzQmr3HKj5WoWTcvVf28Ikztv4TICqqhRjlZCCFlAu2v30rs9oXw8KyyH2IXjAZDZD"
