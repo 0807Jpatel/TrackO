@@ -57,7 +57,7 @@ function sendText(sender, text){
 };
 
 
-app.post('/packageUpdate/', function(req, res){
+app.get('/packageUpdate/', function(req, res){
     res.send("here is the update");
 })
 
