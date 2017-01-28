@@ -34,9 +34,13 @@ app.post('/webhook/', function(req, res){
         if(event.message && event.message.text){
             let text = event.message.text;
             if(text.match(reg)){
-                sendText(sender, "Loading");
+                let splits = text.split(" ");
+                let TN = splits[0];
+                let carrier = splits[1];
+                url = "https://api.goshippo.com/tracks/" + carrier + "/" + TN + "/";
+                sendText(sender, url);
             }else{
-                sendText(sender, "I wasn't able to understand what you said, please try again. \n To track package Enter your tracking number and carrier followed by space");
+                sendText(sender, "I wasn't able to understand what you said, please try again.\nTo track package Enter your tracking number and carrier followed by space");
             }
             
         }
