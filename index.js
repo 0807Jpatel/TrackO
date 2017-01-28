@@ -49,8 +49,8 @@ app.post('/webhook/', function(req, res){
 
                 shippo.track.get_status('usps', '1122334455667788')
                 .then(function(status) {
-                        
-	                    sendText(sender, "Tracking info: %s", JSON.stringify(status, null, 4));
+                        let info = "Tracking info: " +  JSON.stringify(status, null, 4);
+	                    sendText(sender, info);
                 }, function(err) {
 	                    sendText(sender, "There was an error retrieving tracking information: %s", err);
                 });
