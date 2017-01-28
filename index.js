@@ -41,7 +41,7 @@ app.post('/webhook/', function(req, res){
                 request(url, function(error, response, body) {
                     let JSONobj = JSON.parse(body);
                     if(JSONobj.tracking_status != null){
-                        sendText(sender, JSONobj.tracking_status.status);
+                        sendText(sender, JSONobj.tracking_status.status_details);
                     }else{
                         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
                     }
