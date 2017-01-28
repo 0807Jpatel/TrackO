@@ -26,13 +26,19 @@ app.get('/webhook/', function(req, res){
 });
 
 app.post('/webhook/', function(req, res){
+    let reg = [0-9]+ [a-zA-Z]+$;
     let message_events = req.body.entry[0].messaging;
     for(let i = 0; i < message_events.length; i++){
         let event = message_events[i];
         let sender = event.sender.id;
         if(event.message && event.message.text){
             let text = event.message.text;
-            sendText(sender, text);
+            if(text.match(reg)){
+                sendText(sender, "Loading");
+            }else{
+                sendText(sender, "I wasn't able to understand what you said, please try again. \n To track package Enter your tracking number and carrier followed by space");
+            }
+            
         }
     }
     res.sendStatus(200);
