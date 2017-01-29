@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-const shippo = require('shippo')('shippo_test_9242150eb19db0bdb56cbd0f0943a8690f43232a');
+const shippo = require('shippo')('shippo_live_3ccdf00e58f16fec2e2792eeeb758412bf19bb52');
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
