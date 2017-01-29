@@ -56,6 +56,7 @@ app.post('/webhook/', function(req, res){
 
                 shippo.track.create(webhookInfo)
                 .then(function(status){
+                    console.log(status);
                     if(status.tracking_status != null){
                         sendStatus(sender, status);
                         // sendText(sender, status.tracking_status.status_details);
