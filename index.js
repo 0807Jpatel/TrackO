@@ -26,7 +26,7 @@ app.get('/webhook/', function(req, res){
 });
 
 app.post('/webhook/', function(req, res){
-    let reg = /^[0-9]+ [a-zA-Z]+$/;
+    let reg = /^[a-zA-Z0-9]+ [a-zA-Z]+$/;
     let message_events = req.body.entry[0].messaging;
     for(let i = 0; i < message_events.length; i++){
         let event = message_events[i];
