@@ -130,7 +130,7 @@ function sendMD(sender, messageData){
 app.post('/packageUpdate/', function(req, res){
     console.log(req.body.metadata);
     console.log(req.body.tracking_status.status_details);
-    sendText( req.body.metadata , req.body.tracking_status.status_details);
+    sendStatus( req.body.metadata , req.body);
     res.sendStatus(200);
 });
 
