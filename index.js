@@ -57,7 +57,8 @@ app.post('/webhook/', function(req, res){
                 shippo.track.create(webhookInfo)
                 .then(function(status){
                     if(status.tracking_status != null){
-                        sendText(sender, status.tracking_status.status_details);
+                        sendStatus(sender, status);
+                        // sendText(sender, status.tracking_status.status_details);
                     }else{
                         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
                     }
@@ -77,6 +78,32 @@ app.post('/webhook/', function(req, res){
 
 function sendText(sender, text){
     let messageData = {text: text};
+    sendMD(sender, messageData);
+};
+
+
+
+function sendStatus(sender, status){
+    let address = status.tracking_status.location.city + "," + status.tracking_status.location.state + ","+ status.tracking_status.location.state;
+    address = address.replace(" ", "+");
+    let urls = "https://maps.googleapis.com/maps/api/staticmap?center=" + address + "zoom=13&size=600x300&maptype=roadmap&markers=color:red%7C" + address + "&key=AIzaSyBbteSbwdtCtWL8uy-Mz4R8JuALwToPz9g";
+    let messageData = {
+      "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+           {
+            "title":"Infomation regarding your package",
+            "image_url":urls,
+            "subtitle":status.tracking_status.status_details, 
+          }
+        ]
+      }}}
+      sendMD(sender, messageData);
+}
+
+function sendMD(sender, messageData){
     request({
         url: "https://graph.facebook.com/v2.6/me/messages",
         qs: {access_token: token},
@@ -92,7 +119,7 @@ function sendText(sender, text){
             console.log('response body error');
         }
     })
-};
+}
 
 
 // app.get('/packageUpdate/', function(req, res){
