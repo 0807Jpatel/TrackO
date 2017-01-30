@@ -48,23 +48,25 @@ app.post('/webhook/', function(req, res){
                 // }, function(err) {
 	            //         sendText(sender, "There was an error retrieving tracking information");
                 // });
-                var webhookInfo = {
-                    "carrier": carrier,
-                    "tracking_number": TNs,
-                    "metadata": sender
+                var webhookData = {
+	                "carrier":carrier,
+	                "tracking_number":TNs,
+	                "metadata":sender
                 }
-
-                shippo.track.create(webhookInfo)
-                .then(function(status){
+                shippo.track.create(webhookData)
+                .then(function(status) {
                     if(status.tracking_status != null){
                         sendStatus(sender, status);
                         // sendText(sender, status.tracking_status.status_details);
                     }else{
                         sendText(sender, "I wasn't able to find infomation associated with information, please check information and try again");
                     }
-                }, function(err){
+                }, function(err) {
                     sendText(sender, "There was an error retrieving tracking information");
-                })
+                });
+
+
+
 
 
             }else{
