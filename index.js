@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-const shippo = require('shippo')('shippo_live_3ccdf00e58f16fec2e2792eeeb758412bf19bb52');
+const shippo = require('shippo')('shippo_test_9242150eb19db0bdb56cbd0f0943a8690f43232a');
 
 const app = express();
 app.set('port', (process.env.PORT || 5000));
@@ -126,7 +126,7 @@ function sendMD(sender, messageData){
 //     sendText(sender, "LOL it worked :)");
 // })
 
-app.post('/packageUpdate/', function(req, res){
+app.post('/Update/', function(req, res){
     console.log(req.body.tracking_status.status_details);
     console.log(req.body.tracking_number);
     sendStatus( req.body.metadata , req.body)
