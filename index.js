@@ -128,10 +128,9 @@ function sendMD(sender, messageData){
 
 app.post('/packageUpdate/', function(req, res){
     console.log(req.body.tracking_status.status_details);
+    console.log(req.body.tracking_number);
     sendStatus( req.body.metadata , req.body)
-    .then(function(status){
-        res.sendStatus(200);
-    });
+    res.sendStatus(200);
 });
 
 
